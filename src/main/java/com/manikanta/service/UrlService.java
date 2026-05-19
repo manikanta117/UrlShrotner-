@@ -4,6 +4,7 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.manikanta.model.UrlMapping;
 import com.manikanta.repository.UrlRepository;
 
@@ -22,10 +23,14 @@ public class UrlService {
 				             .substring(0,6);	
 		UrlMapping urlMapping = new UrlMapping();
 		
-		urlMapping.setOriginalUrl(originalUrl);
+		urlMapping.setOriginalUrl(originalUrl.replace("\"", ""));
 		urlMapping.setShortCode(shortenCode);
 		
 		return urlRepository.save(urlMapping);
+	}
+	public UrlMapping getOriginalUrl(String shortCode) {
+		return urlRepository.findByShortCode(shortCode)
+				.orElseThrow(()-> new RuntimeException("shorten Url Nt found"));
 	}
 		
 }
