@@ -17,17 +17,20 @@ public class UrlMapping {
 	
 	@Column(unique = true)
 	private String shortCode;
+	
+	private Long clickCount = 0L;
 
 	public UrlMapping() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public UrlMapping(Long id, String originalUrl, String shortCode) {
+	public UrlMapping(Long id, String originalUrl, String shortCode, Long clickCount) {
 		super();
 		this.id = id;
 		this.originalUrl = originalUrl;
 		this.shortCode = shortCode;
+		this.clickCount = clickCount;
 	}
 
 	public Long getId() {
@@ -54,9 +57,19 @@ public class UrlMapping {
 		this.shortCode = shortCode;
 	}
 
+	public Long getClickCount() {
+		return clickCount;
+	}
+
+	public void setClickCount(Long clickCount) {
+		this.clickCount = clickCount;
+	}
+
 	@Override
 	public String toString() {
-		return "UrlMapping [id=" + id + ", originalUrl=" + originalUrl + ", shortCode=" + shortCode + "]";
+		return "UrlMapping [id=" + id + ", originalUrl=" + originalUrl + ", shortCode=" + shortCode + ", clickCount="
+				+ clickCount + "]";
 	}
+
 	
 }

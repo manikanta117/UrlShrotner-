@@ -1,4 +1,4 @@
-package com.manikanta.service;
+package com.manikanta.service;	
 
 import java.util.UUID;
 
@@ -29,8 +29,17 @@ public class UrlService {
 		return urlRepository.save(urlMapping);
 	}
 	public UrlMapping getOriginalUrl(String shortCode) {
-		return urlRepository.findByShortCode(shortCode)
+		UrlMapping urlMapping =  urlRepository.findByShortCode(shortCode)
 				.orElseThrow(()-> new RuntimeException("shorten Url Nt found"));
+		//data base is created beofre adding this column
+		if (urlMapping.getClickCount() == null) {
+		    urlMapping.setClickCount(0L);
+		}
+		urlMapping.setClickCount(urlMapping.getClickCount()+1);
+		
+		urlRepository.save(urlMapping);
+		
+		return urlMapping;
 	}
 		
 }
