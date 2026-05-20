@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.manikanta.DTO.UrlReques;
 import com.manikanta.model.UrlMapping;
 import com.manikanta.service.UrlService;
 @RestController
@@ -16,8 +17,8 @@ public class TestController {
 		private UrlService urlService;
 	    
 		@PostMapping("/shorten")
-	    public UrlMapping shortenUrl(@RequestBody String OriginalUrl) {
-	    	return urlService.shortenUrl(OriginalUrl);
+	    public UrlMapping shortenUrl(@RequestBody UrlReques request) {
+	    	return urlService.shortenUrl(request.getUrl());
 	    	
 	    }
 		  @GetMapping("/{shortCode}")
